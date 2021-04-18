@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import dev.godraadam.uniapp.model.Role;
+
 
 @Configuration
 @EnableWebSecurity
@@ -30,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
             .authorizeRequests()
+            .antMatchers("/api/admin/*").hasRole(Role.ADMIN.name())
             .anyRequest()
             .authenticated()
             .and()

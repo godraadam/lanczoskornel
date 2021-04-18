@@ -15,7 +15,5 @@ public class Teacher extends ApplicationUser {
     
     @OneToOne(mappedBy = "teacher")
     private Curriculum curriculum;
-
-    @Getter
-    private static Role role = Role.TEACHER;
+    private Role role = Role.TEACHER;
 }

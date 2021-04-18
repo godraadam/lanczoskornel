@@ -11,10 +11,9 @@ import dev.godraadam.uniapp.repo.AssignmentRepo;
 import dev.godraadam.uniapp.repo.StudentRepo;
 import dev.godraadam.uniapp.service.exception.ResourceNotFoundException;
 
-
 @Service
 public class GradeAssembler {
-    
+
     @Autowired
     private StudentRepo studentRepo;
 
@@ -23,7 +22,8 @@ public class GradeAssembler {
 
     public Grade createModel(GradeDTO dto) {
         Student student = studentRepo.findById(dto.getStudentId()).orElseThrow(ResourceNotFoundException::new);
-        Assignment assignment = assignmentRepo.findById(dto.getAssignmentId()).orElseThrow(ResourceNotFoundException::new);
+        Assignment assignment = assignmentRepo.findById(dto.getAssignmentId())
+                .orElseThrow(ResourceNotFoundException::new);
         Grade grade = new Grade();
         grade.setAssignment(assignment);
         grade.setStudent(student);

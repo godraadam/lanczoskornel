@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 public class Student extends ApplicationUser {
     
-    private String group;
+    private String groupName;
 
     @OneToMany(mappedBy = "student")
     private List<Attendance> attendances;
@@ -26,6 +26,5 @@ public class Student extends ApplicationUser {
     @OneToMany(mappedBy = "student")
     private List<Enrollment> enrollments;
 
-    @Getter
-    private static Role role = Role.STUDENT;
+    private Role role = Role.STUDENT;
 }
