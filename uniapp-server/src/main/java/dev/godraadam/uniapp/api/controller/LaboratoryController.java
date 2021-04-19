@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.godraadam.uniapp.api.assembler.LaboratoryAssembler;
@@ -30,13 +30,14 @@ public class LaboratoryController {
         return labRepo.findByCurriculumId(id);
     }
 
-    @PostMapping("/api/lab")
-    public Laboratory createLaboratory(@RequestParam LaboratoryDTO dto) {
-        return labRepo.save(laboratoryAssembler.createModel(dto));
+    @PostMapping("/api/lab/create")
+    public LaboratoryDTO createLaboratory(@RequestBody LaboratoryDTO dto) {
+        Laboratory laboratory = labRepo.save(laboratoryAssembler.createModel(dto));
+        return laboratoryAssembler.createDTO(laboratory);
     }
 
-    @PutMapping("/api/lab")
-    public Laboratory modifyLaboratory(@RequestParam LaboratoryDTO dto) {
+    @PutMapping("/api/lab/edit")
+    public Laboratory modifyLaboratory(@RequestBody LaboratoryDTO dto) {
         return labRepo.save(laboratoryAssembler.createModel(dto));
     }
 

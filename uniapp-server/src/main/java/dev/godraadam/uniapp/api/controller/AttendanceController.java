@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.godraadam.uniapp.api.assembler.AttendanceAssembler;
@@ -35,17 +36,17 @@ public class AttendanceController {
     }
 
     @PostMapping("api/attendance")
-    public void recordAttendance(AttendanceDTO dto) {
+    public void recordAttendance(@RequestBody AttendanceDTO dto) {
         attendanceRepo.save(attendanceAssembler.createModel(dto));
     }
 
     @PutMapping("api/attendance")
-    public void modifyAttendance(AttendanceDTO dto) {
+    public void modifyAttendance(@RequestBody AttendanceDTO dto) {
         attendanceRepo.save(attendanceAssembler.createModel(dto));
     }
 
     @DeleteMapping("api/attendance/delete/{id}")
-    public void removeAttendance(Long id) {
+    public void removeAttendance(@PathVariable Long id) {
         attendanceRepo.deleteById(id);
     }
 }

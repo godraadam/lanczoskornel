@@ -15,6 +15,7 @@ public class LaboratoryDTO {
     private String title;
     private LocalDateTime date;
     private String description;
+    private Long id;
     @NotNull
     private Long curriculumId;
 

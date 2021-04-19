@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.godraadam.uniapp.api.assembler.CurriculumAssembler;
@@ -29,17 +31,17 @@ public class CurriculumController {
     }
 
     @PostMapping("/api/curriculum")
-    public Curriculum addCurriculum(CurriculumDTO dto) {
+    public Curriculum addCurriculum(@RequestBody CurriculumDTO dto) {
         return curriculumRepo.save(curriculumAssembler.createModel(dto));
     }
 
     @PutMapping("/api/curriculum")
-    public Curriculum editCurriculum(CurriculumDTO dto) {
+    public Curriculum editCurriculum(@RequestBody CurriculumDTO dto) {
         return curriculumRepo.save(curriculumAssembler.createModel(dto));
     }
    
     @DeleteMapping("/api/curriculum/delete/{id}")
-    public void deleteCurriculum(Long id) {
+    public void deleteCurriculum(@PathVariable Long id) {
         curriculumRepo.deleteById(id);
     }
 }

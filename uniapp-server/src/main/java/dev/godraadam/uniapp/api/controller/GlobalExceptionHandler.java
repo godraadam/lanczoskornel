@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import dev.godraadam.uniapp.service.exception.EmailTakenException;
 import dev.godraadam.uniapp.service.exception.IncorrectPasswordException;
+import dev.godraadam.uniapp.service.exception.InvalidRegistrationTokenException;
 import dev.godraadam.uniapp.service.exception.ResourceNotFoundException;
 import dev.godraadam.uniapp.service.exception.UserNameTakenException;
 import dev.godraadam.uniapp.service.exception.UserNotFoundException;
@@ -33,5 +34,9 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
     public void handleResourceNotFound() {}
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(InvalidRegistrationTokenException.class)
+    public void handleInvalidToken() {}
     
 }

@@ -1,5 +1,6 @@
 package dev.godraadam.uniapp.api.assembler;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,20 @@ public class AssignmentAssembler {
     @Autowired
     private LaboratoryRepo labRepo;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     public Assignment createModel(AssignmentDTO dto) {
         Laboratory laboratory = labRepo.findById(dto.getLabId()).orElseThrow(ResourceNotFoundException::new);
-        Assignment assignment = new Assignment();
-        assignment.setDeadline(dto.getDeadline());
-        assignment.setDescription(dto.getDescription());
+        Assignment assignment = modelMapper.map(dto, Assignment.class);
         assignment.setLaboratory(laboratory);
-        assignment.setId(dto.getId());
         return assignment;
+    }
+
+    public AssignmentDTO createDTO(Assignment model) {
+        AssignmentDTO dto = modelMapper.map(model, AssignmentDTO.class);
+        dto.setLabId(model.getLaboratory().getId());
+        return dto;
     }
     
 }

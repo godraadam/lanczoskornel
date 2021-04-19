@@ -1,7 +1,6 @@
 package dev.godraadam.uniapp.service;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,7 +26,7 @@ public class StudentService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Student registerStudent(Student studentToRegister, UUID token) throws UserNameTakenException, EmailTakenException {
+    public Student registerStudent(Student studentToRegister, String token) throws UserNameTakenException, EmailTakenException, InvalidRegistrationTokenException {
         
         // Check if username is available
         studentRepo.findByUsername(studentToRegister.getUsername()).ifPresent(user -> {throw new UserNameTakenException();});

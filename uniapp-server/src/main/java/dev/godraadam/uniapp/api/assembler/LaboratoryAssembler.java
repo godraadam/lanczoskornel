@@ -27,4 +27,10 @@ public class LaboratoryAssembler {
         return lab;
     }
 
+    public LaboratoryDTO createDTO(Laboratory model) {
+        LaboratoryDTO dto = modelMapper.map(model, LaboratoryDTO.class);
+        dto.setCurriculumId(model.getCurriculum().getId());
+        return dto;
+    }
+
 }

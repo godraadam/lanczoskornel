@@ -1,7 +1,6 @@
 package dev.godraadam.uniapp.model;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -15,6 +14,6 @@ import lombok.Setter;
 @Setter
 public class RegistrationToken extends BaseModel {
     
-    private UUID token;
+    private String token;
     private LocalDateTime expiryDate;
 }
