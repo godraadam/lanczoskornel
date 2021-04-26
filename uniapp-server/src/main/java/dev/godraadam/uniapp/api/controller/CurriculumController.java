@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.godraadam.uniapp.api.assembler.CurriculumAssembler;
 import dev.godraadam.uniapp.api.dto.CurriculumDTO;
 import dev.godraadam.uniapp.model.Curriculum;
+import dev.godraadam.uniapp.model.Teacher;
 import dev.godraadam.uniapp.repo.CurriculumRepo;
+import dev.godraadam.uniapp.repo.TeacherRepo;
 
 @RestController
 public class CurriculumController {
     
     @Autowired
     private CurriculumRepo curriculumRepo;
+
+    @Autowired
+    private TeacherRepo teacherRepo;
 
     @Autowired 
     private CurriculumAssembler curriculumAssembler;
@@ -31,8 +36,12 @@ public class CurriculumController {
     }
 
     @PostMapping("/api/curriculum")
-    public Curriculum addCurriculum(@RequestBody CurriculumDTO dto) {
-        return curriculumRepo.save(curriculumAssembler.createModel(dto));
+    public CurriculumDTO addCurriculum(@RequestBody CurriculumDTO dto) {
+        Curriculum curriculum = curriculumRepo.save(curriculumAssembler.createModel(dto));
+        Teacher teacher = curriculum.getTeacher();
+        teacher.setCurriculum(curriculum);
+        teacherRepo.save(teacher);
+        return curriculumAssembler.createDTO(curriculum);
     }
 
     @PutMapping("/api/curriculum")

@@ -25,4 +25,10 @@ public class CurriculumAssembler {
         curriculum.setTeacher(teacher);
         return curriculum;
     }
+
+    public CurriculumDTO createDTO(Curriculum curriculum) {
+        CurriculumDTO dto = modelMapper.map(curriculum, CurriculumDTO.class);
+        dto.setTeacherId(curriculum.getTeacher().getId());
+        return dto;
+    }
 }

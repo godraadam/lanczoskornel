@@ -8,6 +8,7 @@ import dev.godraadam.uniapp.model.Teacher;
 import dev.godraadam.uniapp.repo.TeacherRepo;
 import dev.godraadam.uniapp.service.exception.EmailTakenException;
 import dev.godraadam.uniapp.service.exception.UserNameTakenException;
+import dev.godraadam.uniapp.service.exception.UserNotFoundException;
 
 @Service
 public class TeacherService {
@@ -30,5 +31,9 @@ public class TeacherService {
         
         // Persist teacher entity
         return teacherRepo.save(teacherToRegister);
+    }
+
+    public Teacher getTeacherById(Long id) throws UserNotFoundException {
+        return teacherRepo.findById(id).orElseThrow(UserNotFoundException::new);
     }
 }
